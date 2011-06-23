@@ -1,6 +1,7 @@
 # Django settings file for a project based on the playdoh template.
 
 import os
+import socket 
 
 from django.utils.functional import lazy
 
@@ -97,6 +98,19 @@ LANGUAGES = lazy(lazy_langs, dict)()
 # Paths that don't require a locale code in the URL.
 SUPPORTED_NONLOCALES = ['media']
 
+# The host currently running the site.  Only use this in code for good reason;
+# the site is designed to run on a cluster and should continue to support that
+HOSTNAME = socket.gethostname()
+
+# The front end domain of the site. If you're not running on a cluster this
+# might be the same as HOSTNAME but don't depend on that.  Use this when you
+# need the real domain.
+DOMAIN = HOSTNAME
+
+# Full base URL for your main site including protocol.  No trailing slash.
+#   Example: https://addons.mozilla.org
+SITE_URL = 'http://%s' % DOMAIN
+
 
 ## Media and templates.
 
@@ -167,8 +181,11 @@ MINIFY_BUNDLES = {
         ),
     },
     'js': {
-        'example_js': (
-            'js/libs/jquery-1.4.4.min.js',
+        'socorro_js': (
+            'js/__utm.js',
+            'js/jquery/jquery-1.3.2.min.js',
+            'js/jquery/plugins/jquery.cookies.2.2.0.js',
+            'js/socorro/nav.js?v=1.7.6'
         ),
     }
 }
@@ -177,7 +194,6 @@ MINIFY_BUNDLES = {
 ## Middlewares, apps, URL configs.
 
 MIDDLEWARE_CLASSES = (
-    'commons.middleware.LocaleURLMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
