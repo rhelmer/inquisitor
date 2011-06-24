@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block site_css %}
+
+{{ css('dashboard_css') }}
+
+{% endblock %}
+
+{% block site_js %}
+
+  <script type="text/javascript">data = {{graph_data|safe}}</script>
+
+  {{ js('dashboard_js') }}
+
+{% endblock %}
+
+{% block maincontent %}
+
+<div class="page-heading">
+        <h2><?php out::H($product); ?> 
+        <?php if (isset($version) && !empty($version)) { ?>
+            <?php out::H($version); ?>
+        <?php } ?>
+        Crash Data</h2>
+        <ul class="options">
+                <li><a href="#?duration=3">3 days</a></li>
+                <li><a href="#?duration=7" class="selected">7 days</a></li>
+                <li><a href="#?duration=14">14 days</a></li>
+        </ul>       
+</div>          
+        
+
+<div class="panel">
+    <div class="title">
+        <h2>Crashes per 100  Active Daily Users</h2>
+    </div>      
+                
+    <div class="body">
+        {% if graph_data %}
+            <div id="adu-chart"></div>
+        {% else %}
+            <p>No Active Daily User crash data is available for this report.</p>
+        {% endif %}
+    </div>      
+</div>
+    
+<div class="panel">
+    <div class="title">
+        <h2>Crash Reports</h2>
+    </div>
+    
+    <div class="body">
+        <div id="release_channels">
+        {% for ver in versions %}
+        <div class="release_channel">
+            <h4>{{product}} {{ver}}</h4>
+            <ul>
+              <li class="emphatic"><a href="#">Top Crashers</a></li>
+              <li class="emphatic"><a href="#">Top Changers</a></li>
+              <li><a href="#">Top Plugin Crashers</a></li>
+              <li><a href="#">Top Crashes by URL</a></li>
+              <li><a href="#">Top Crashes by Domain</a></li>
+              <li><a href="#">Top Crashes by Topsite</a></li>
+            </ul> 
+        </div>
+	    {% endfor %}
+        </div> 
+    <br class="clear" />
+   </div>
+</div>
+<br class="clear" />
+
+{% endblock %}
