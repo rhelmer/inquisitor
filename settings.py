@@ -179,6 +179,9 @@ MINIFY_BUNDLES = {
         'example_css': (
             'css/examples/main.css',
         ),
+        'dashboard_css' : (
+             'css/daily.css',
+        ),
     },
     'js': {
         'socorro_js': (
@@ -186,6 +189,12 @@ MINIFY_BUNDLES = {
             'js/jquery/jquery-1.3.2.min.js',
             'js/jquery/plugins/jquery.cookies.2.2.0.js',
             'js/socorro/nav.js?v=1.7.6'
+        ),
+        'dashboard_js': (
+             'js/flot-0.7/jquery.flot.pack.js',
+			 'js/socorro/daily.js',
+			 'js/socorro/dashboard.js',
+			 'js/socorro/topcrashers.js'
         ),
     }
 }

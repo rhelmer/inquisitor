@@ -5,8 +5,8 @@
     <link href="{{MEDIA_URL}}css/screen.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="{{MEDIA_URL}}favicon.ico" rel="icon" type="image/png" />
 	{{ js('socorro_js') }}
+	{% block site_css %}{% endblock %}
     {% block site_js %}{% endblock %}
-    {% block site_css %}{% endblock %}
     {% block site_head %}{% endblock %}
 </head>
 
