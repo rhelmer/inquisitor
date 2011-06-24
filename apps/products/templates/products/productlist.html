@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block maincontent %}
+
+<div class="panel">
+	<div class="title">
+		<h2>Mozilla Products in Crash Reporter</h2>
+    </div>
+    
+    <div class="body">
+    <p>
+        <ul>
+        {% for x in products %}
+			<li><a href="{{ url('products.product', x)}}">{{ x }}</a></li>
+		{% endfor %}
+        </ul>
+    </p>
+    </div>
+
+</div>
+
+{% endblock %}
